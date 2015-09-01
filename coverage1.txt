@@ -1,0 +1,173 @@
+Tyler Hadley
+CS362
+assignment3 - coverage1.txt
+
+A quick discussion about types of coverage so it doesn't have
+to be explained in each test:
+
+statement coverage: each line of code is executed at least once
+branch coverage: branches are sections of code where execution diverges, 
+	such as if statements, switch statements, etc. Branch coverage is 
+	writing tests to trigger all of these branching statements.
+path coverage: this takes branch coverage one step further. If you visualize
+	a program as a graph with nodes and edges, branch coverage makes sure
+	each node is executed. Path coverage makes sure all edges are
+	executed, and all possible paths through the edges are executed.
+
+gcov for unittest1(updateCoins):
+
+Function 'updateCoins'
+Lines executed:100.00% of 11
+Branches executed:100.00% of 8
+Taken at least once:100.00% of 8
+No calls
+
+File 'dominion.c'
+Lines executed:15.68% of 593
+Branches executed:16.35% of 416
+Taken at least once:13.70% of 416
+Calls executed:7.07% of 99
+dominion.c:creating 'dominion.c.gcov'
+
+unittest1 achieves 100% statement and branch coverage for updateCoins(). The
+only branch in updateCoins is an if, elseif, elseif statement so the test
+includes cases where each branch is triggered. The test also evaluates
+updateCoins for different players and different bonuses. No bugs were found.
+
+gcov for unittest2(discardCard))
+
+Function 'discardCard'
+Lines executed:100.00% of 13
+Branches executed:100.00% of 6
+Taken at least once:100.00% of 6
+No calls
+
+File 'dominion.c'
+Lines executed:17.54% of 593
+Branches executed:17.79% of 416
+Taken at least once:14.66% of 416
+Calls executed:7.07% of 99
+dominion.c:creating 'dominion.c.gcov'
+
+unittest2 achieved 100% statement and branch coverage for discardCard. The
+function branches on the trash flag and the location of the discarded card
+within the hand. unittest2 tests different numbers of players, different
+hand sizes and different locations of the card to discard. It checks that
+the correct card is discarded, and that the hand size is correct after 
+discarding. The test does this for both trash flag set and not set.
+
+gcov for unittest3(shuffle)
+
+Function 'shuffle'
+Lines executed:100.00% of 16
+Branches executed:100.00% of 8
+Taken at least once:100.00% of 8
+Calls executed:100.00% of 2
+
+File 'dominion.c'
+Lines executed:15.68% of 593
+Branches executed:16.35% of 416
+Taken at least once:13.70% of 416
+Calls executed:7.07% of 99
+
+unittest3 achieved 100% statement and branch coverage for shuffle. shuffle
+branches only on the deck being empty or not. unittest3 tests different 
+numbers of players and deck sizes. For each combination, the deck is shuffled
+twice: first to make sure the deck is different than the input deck and second
+to make sure random is seeded properly and returns a different random set each
+shuffle.
+
+gcov for unittest4(drawCard)
+
+Function 'drawCard'
+Lines executed:96.00% of 25
+Branches executed:100.00% of 6
+Taken at least once:83.33% of 6
+Calls executed:100.00% of 1
+
+File 'dominion.c'
+Lines executed:18.04% of 593
+Branches executed:17.31% of 416
+Taken at least once:14.42% of 416
+Calls executed:8.08% of 99
+
+unittest4 doesn't achieve 100% coverage because the drawCard function contains 
+a number of printfs that only execute if DEBUG is set. unittest4 does not 
+execute that code. Not counting DEBUGs, drawCard only branches on whether or 
+not the deck is empty and needs to be shuffled. Tested values are different
+numbers of players and deck sizes. unittest4 checks that the discard count 
+and deck size are as expected for both an empty and nonempty deck. It also 
+checks that the hand size is correct.
+
+gcov for cardtest1(adventurer)
+
+I couldn't get adventurer to test without seg faulting, so no gcov info.
+
+adventurer branches on empty deck and if the card drawn is a treasure or not.
+adventurer is tested with combinations of number of players and deck sizes.
+For each combination an all treasures deck, no treasures deck and mixed 
+treasure and action card deck are tested. Before each adventurer the
+game state is reset, after each adventurer hand size is tested, deck + discard
++ played count is tested and the cards in the hand are checked to make sure
+only treasures were added. See bugs1.txt for actual bugs found.
+
+gcov for cardtest2(smithy)
+ 
+Function 'zzzsmithycardplay'
+Lines executed:100.00% of 5
+Branches executed:100.00% of 2
+Taken at least once:100.00% of 2
+Calls executed:100.00% of 2
+
+File 'dominion.c'
+Lines executed:20.24% of 593
+Branches executed:18.75% of 416
+Taken at least once:15.63% of 416
+Calls executed:10.10% of 99
+dominion.c:creating 'dominion.c.gcov'
+
+cardtest2 achieves 100% statement and branch coverage. Smithy is tested on 
+varying number of players, deck sizes, hand sizes and position of smithy in 
+the hand. For each combination of the previous values, smithy is called with 
+a mixed treasure and action card deck. After smithy is played, hand size is
+checked and deck + discard + played sizes are checked. 
+
+gcov for cardtest3(village)
+
+Function 'zzzvilliagecardplay'
+Lines executed:100.00% of 5
+No branches
+Calls executed:100.00% of 2
+
+File 'dominion.c'
+Lines executed:20.24% of 593
+Branches executed:18.27% of 416
+Taken at least once:15.14% of 416
+Calls executed:10.10% of 99
+
+cardtest3 achieves 100% statement coverage. Village is tested on 
+varying number of players, deck sizes, hand sizes and position of village in 
+the hand. For each combination of the previous values, village is called with 
+a mixed treasure and action card deck. After village is played, hand size is
+checked, deck + discard + played sizes are checked and number of actions are
+checked. See bugs1.txt for a potential non-bug issue with this function.
+
+gcov for cardtest4(great_hall)
+
+Function 'zzzgreathallcardplay'
+Lines executed:100.00% of 5
+No branches
+Calls executed:100.00% of 2
+
+File 'dominion.c'
+Lines executed:20.24% of 593
+Branches executed:18.27% of 416
+Taken at least once:15.14% of 416
+Calls executed:10.10% of 99
+
+cardtest4 achieves 100% statement coverage. great hall is tested on 
+varying number of players, deck sizes, hand sizes and position of great hall in 
+the hand. For each combination of the previous values, great hall is called witha mixed treasure and action card deck. After great hall is played, hand size is
+checked, deck + discard + played sizes are checked and number of actions are
+checked. See bugs1.txt for bugs found.
+ 

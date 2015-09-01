@@ -1,0 +1,43 @@
+Tyler Hadley
+CS362
+assignment4 - randomhistory.txt
+
+I'm going to document my development process by listing the order of tasks
+I attempted, with a brief note on each.
+
+-create sane random game state function
+	poking around the files, I saw some code in betterTestDrawCard.c that
+	looked like it would work.
+	
+	I played around with it some, but decided a sane gamestate function
+	might be better, so I made one that assigned random values to each
+	gameState aspect. It took a while, but can be reused. 
+
+-test smithy
+	my plan is to run a fixed number of tests (2000 for now)
+	in each iteration, a random game state will be created, smithy will be
+	played and it's success will be determined using the methods I
+	implemented in assignment 3. This approach was successful.
+
+-test adventurer
+	similar to smithy, but with different tests. The things I checked 
+	for correctness are hand size, deck+discard+played size and 
+	treasure count in hand. The tester seems successful, though asserts
+	have to be disabled due to bugs previously found in adventurer.
+
+-coverage smithy
+	gcov registers 100% branch and statement coverage, which is good
+	because it means enough random tests are running to cover all
+	cases, which for smithy is just deck size < 3 and >=3. This
+	can't be guarenteed though, as it is based on random chance.
+
+-coverage adventurer
+	gcov registers 95% lines executed with this test. This makes sense
+	as there are several very specific cases that will be hard to test
+	with random code. A better test approach would be to start with
+	hardcoded tests to make sure all paths are taken, then move to 
+	random to further test. Using only the random tester, one could
+	tighten the test range of hand and deck (currently MAX_HAND and 
+	MAX_DECK) to increase the odds of hitting specific cases.
+
+

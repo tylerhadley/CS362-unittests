@@ -1,0 +1,25 @@
+Tyler Hadley
+hadleyt@onid.oregonstate.edu
+CS362-400
+refactor.txt
+
+The following cards have had their implementation moved from the switch 
+statement to their own function:
+great hall
+mine
+remodel
+baron
+embargo
+
+The following errors have been introduced
+in zzzgreathallcardplay()
+   num actions changed to +2, should be +1
+in zzzminecardplay()
+   changed function so players can buy up to 4 more than trashed treasure, 
+   should be 3
+in zzzremodelcardplay()
+   loop to find and discard trashed card starts at 1, not 0
+in zzzbaroncardplay()
+   incremented estates rather than decrement
+in zzzembargocardplay()
+   set call to discardCard so it won't trash
